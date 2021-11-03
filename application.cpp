@@ -134,7 +134,8 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
                     g -= dg1;
                 }
             }
-        
+        }
+    }
 }
 
 // triggered each time the application needs to redraw
