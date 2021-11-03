@@ -42,36 +42,65 @@ void set_pixel(int x, int y)
 void draw_line(int x0, int y0, int x1, int y1, float col[3])
 {
     // TODO: Implement the correct algorithm here.
-    
-    if(x1 < x0){        //swap the points if necessary
-        int temp = x0;
-        x0 = x1;
-        x1 = temp;
-        temp = y0;
-        y0 = y1;
-        y1 = temp;
+    if((y1 - y0)/(x1 - 0) <= 1 && (y1 - y0)/(x1 - 0) >= -1 ){
+
+        if(x1 < x0){        //swap the points if necessary
+            int temp = x0;
+            x0 = x1;
+            x1 = temp;
+            temp = y0;
+            y0 = y1;
+            y1 = temp;
+        }
+
+
+        float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 - x1 * y0));
+        float dx = x1 - x0;
+        float dy = (y1 > y0) ? 1 : -1;
+        float dg0 = 2 * dy *((y1 - y0) + (x1 - x0));
+        float dg1 = 2 * dy *(y1 - y0);
+
+        for(int x = x0, y = y0; x <= x1; x++)
+        {
+            set_pixel(x, y, col);
+            if ( g < 0){
+                y += dy;
+                g += dg0;
+            }
+            else{
+                g += dg1;
+            }
+        }
     }
+    else{
+
+        if(y1 < y0){        //swap the points if necessary
+            int temp = y0;
+            y0 = y1;
+            y1 = temp;
+            temp = x0;
+            x0 = x1;
+            x1 = temp;
+        }
 
 
-    float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 - x1 * y0));
-    float dx = x1 - x0;
-    float dy = y1 > y0 ? 1 : -1;
-    float dg0 = 2 * dy *((y1 - y0) + (x1 - x0));
-    float dg1 = 2 * dy *(y1 - y0);
+        float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 - y1 * x0));
+        float dy = y1 - y0;
+        float dx = (x1 > x0) ? 1 : -1;
+        float dg0 = 2 * dx *((x1 - x0) + (y1 - y0));
+        float dg1 = 2 * dx *(x1 - x0);
 
-    float m = dy/dx;
-    float b = y0 - m*x0;
-
-    for(int x = x0, y = y0; x <= x1; x++)
-    {
-          set_pixel(x, m*x + b);
-          if ( g < 0){
-            y += dy;
-            g += dg0;
-          }
-          else{
-            g += dg1;
-          }
+        for(int x = x0, y = y0; y <= y1; y++)
+        {
+            set_pixel(x, y, col);
+            if ( g < 0){
+                x += dx;
+                g += dg0;
+            }
+            else{
+                g += dg1;
+            }
+        }
     }
 }
 
