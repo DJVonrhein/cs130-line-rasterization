@@ -55,7 +55,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
 
 
         float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 - x1 * y0));
-        float dx = x1 - x0;
+        // float dx = x1 - x0;
         float dy = (y1 > y0) ? 1 : -1;
         float dg0 = 2 * dy *((y1 - y0) + (x1 - x0));
         float dg1 = 2 * dy *(y1 - y0);
@@ -85,7 +85,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
 
 
         float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 - y1 * x0));
-        float dy = y1 - y0;
+        // float dy = y1 - y0;
         float dx = (x1 > x0) ? 1 : -1;
         float dg0 = 2 * dx *((x1 - x0) + (y1 - y0));
         float dg1 = 2 * dx *(x1 - x0);
