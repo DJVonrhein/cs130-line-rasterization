@@ -42,7 +42,7 @@ void set_pixel(int x, int y)
 void draw_line(int x0, int y0, int x1, int y1, float col[3])
 {
     // TODO: Implement the correct algorithm here.
-    if((y1 - y0)/(x1 - 0) <= 1 && (y1 - y0)/(x1 - 0) >= -1 ){
+    if((y1 - y0)/(x1 - 0) <= 1 && (y1 - y0)/(x1 - 0) >= -1 ){   // |m| <= 1
 
         if(x1 < x0){        //swap the points if necessary
             int temp = x0;
@@ -54,11 +54,11 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         }
 
 
-        float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 - x1 * y0));
+        float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
         // float dx = x1 - x0;
         float dy = (y1 > y0) ? 1 : -1;
-        float dg0 = 2 * dy *((y1 - y0) + (x1 - x0));
-        float dg1 = 2 * dy *(y1 - y0);
+        float dg0 = 2 * dy *((y0 - y1) + (x1 - x0));
+        float dg1 = 2 * dy *(y0 - y1);
 
         for(int x = x0, y = y0; x <= x1; x++)
         {
@@ -72,7 +72,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
             }
         }
     }
-    else{
+    else{               // |m| > 1
 
         if(y1 < y0){        //swap the points if necessary
             int temp = y0;
@@ -84,11 +84,11 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         }
 
 
-        float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 - y1 * x0));
+        float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
         // float dy = y1 - y0;
         float dx = (x1 > x0) ? 1 : -1;
-        float dg0 = 2 * dx *((x1 - x0) + (y1 - y0));
-        float dg1 = 2 * dx *(x1 - x0);
+        float dg0 = 2 * dx *((x0 - x1) + (y1 - y0));
+        float dg1 = 2 * dx *(x0 - x1);
 
         for(int x = x0, y = y0; y <= y1; y++)
         {
