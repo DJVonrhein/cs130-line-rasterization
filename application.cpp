@@ -56,22 +56,38 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
             y1 = temp;
         }
 
+        
 
         float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
-        // float dx = x1 - x0;
+        float dx = x1 - x0;
         float dy = (y1 > y0) ? 1 : -1;
+        float m = dy/dx;
         float dg0 = 2 * dy *((y0 - y1) + (x1 - x0));
         float dg1 = 2 * dy *(y0 - y1);
-
-        for(int x = x0, y = y0; x <= x1; x++)
-        {
-            set_pixel(x, y, col);
-            if ( g < 0){
-                y += dy;
-                g += dg0;
+        if (m >= 0){
+            for(int x = x0, y = y0; x <= x1; x++)
+            {
+                set_pixel(x, y, col);
+                if ( g < 0){
+                    y += dy;
+                    g += dg0;
+                }
+                else{
+                    g += dg1;
+                }
             }
-            else{
-                g += dg1;
+        }
+        if (m < 0){
+            for(int x = x0, y = y0; x <= x1; x++)
+            {
+                set_pixel(x, y, col);
+                if ( g < 0){
+                    y += dy;
+                    g -= dg0;
+                }
+                else{
+                    g -= dg1;
+                }
             }
         }
     }
@@ -88,23 +104,37 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
 
 
         float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
-        // float dy = y1 - y0;
+        float dy = y1 - y0;
         float dx = (x1 > x0) ? 1 : -1;
+        float m = dy/dx;
         float dg0 = 2 * dx *((x0 - x1) + (y1 - y0));
         float dg1 = 2 * dx *(x0 - x1);
-
-        for(int x = x0, y = y0; y <= y1; y++)
-        {
-            set_pixel(x, y, col);
-            if ( g < 0){
-                x += dx;
-                g += dg0;
-            }
-            else{
-                g += dg1;
+        if(m >= 0){
+            for(int x = x0, y = y0; y <= y1; y++)
+            {
+                set_pixel(x, y, col);
+                if ( g < 0){
+                    x += dx;
+                    g += dg0;
+                }
+                else{
+                    g += dg1;
+                }
             }
         }
-    }
+        if(m < 0){
+            for(int x = x0, y = y0; y <= y1; y++)
+                {
+                set_pixel(x, y, col);
+                if ( g < 0){
+                    x += dx;
+                    g -= dg0;
+                }
+                else{
+                    g -= dg1;
+                }
+            }
+        
 }
 
 // triggered each time the application needs to redraw
