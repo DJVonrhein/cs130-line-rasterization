@@ -81,15 +81,23 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
     }
     else{               // |m| > 1
 
-        if(y1 < y0){        //swap the points if necessary
-            int temp = y0;
-            y0 = y1;
-            y1 = temp;
-            temp = x0;
+        // if(y1 < y0){        //swap the points if necessary
+        //     int temp = y0;
+        //     y0 = y1;
+        //     y1 = temp;
+        //     temp = x0;
+        //     x0 = x1;
+        //     x1 = temp;
+        // }
+
+        if(x1 < x0){        //swap the points if necessary
+            int temp = x0;
             x0 = x1;
             x1 = temp;
+            temp = y0;
+            y0 = y1;
+            y1 = temp;
         }
-
 
         // float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
         float g = ( (y0 - y1)* (x0 + 2.0) + (x1 - x0) * (y0 + 1.0) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
