@@ -58,7 +58,9 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
 
         
 
-        float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+        // float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+        float g =  ( (y0 - y1)* (x0 + 2.0) + (x1 - x0) * (y0 + 1.0) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+
         // float dx = x1 - x0;
         float dy = (y1 > y0) ? 1 : -1;
         // float m = dy/dx;
@@ -89,7 +91,9 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         }
 
 
-        float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
+        // float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
+        float g = ( (y0 - y1)* (x0 + 2.0) + (x1 - x0) * (y0 + 1.0) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+
         // float dy = y1 - y0;
         float dx = (x1 > x0) ? 1 : -1;
         // float m = dy/dx;
