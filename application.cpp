@@ -66,7 +66,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         for(int x = x0, y = y0; x <= x1; x++)
         {
             set_pixel(x, y, col);
-            int g = 2* deltaY * ( A * (x + 1) + B * (y + 0.5) + C);
+            int g = 2* deltaY * ( -1.0 * A * (x + 1) + B * (y + 0.5) + C);
             if ( g < 0){
                 y += deltaY;
             }
@@ -85,7 +85,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         // float dy = y1 - y0;
         // int deltaY = 1;
         int deltaX = (x1 > x0) ? 1.0 : -1.0;
-        float A = x0 - x1;
+        float A = x1 - x0;
         float B = y1 - y0;
         float C = (x0 * y1 )- (x1 * y0);
         // float m = dy/dx;
@@ -95,7 +95,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         for(int x = x0, y = y0; y <= y1; y++)
         {
             set_pixel(x, y, col);
-            int g = 2 * deltaX * ( A * (x + 1) + B * (y + 0.5) + C);
+            int g = 2 * deltaX * ( -1 * A * (x + 1) + B * (y + 0.5) + C);
             if ( g < 0){
                 x += deltaX;
             }
