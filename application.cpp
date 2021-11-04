@@ -87,7 +87,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         int deltaX = (x1 > x0) ? 1.0 : -1.0;
         float A = x1 - x0;
         float B = y1 - y0;
-        float C = (x0 * y1 )- (x1 * y0);
+        float C = (-1 * x0 * y1 ) + (x1 * y0);
         // float m = dy/dx;
         // float dg0 = 2.0 * dx *((x0 - x1) + (y1 - y0));
         // float dg1 = 2.0 * dx *(x0 - x1);
