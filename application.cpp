@@ -48,99 +48,59 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
     if((y1 - y0)/(x1 - x0) <= 1 && (y1 - y0)/(x1 - x0) >= -1 ){   // |m| <= 1
 
         if(x1 < x0){        //swap the points if necessary
-            int temp = x0;
-            x0 = x1;
-            x1 = temp;
-            temp = y0;
-            y0 = y1;
-            y1 = temp;
+            std::swap(x0,x1);
+            std::swap(y0,y1);
         }
 
         
 
         // float g = 2 *( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
         
-        float g =  ( (y0 - y1)* (x0 + 2.0) + (x1 - x0) * (y0 + 1.0) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
-
+        float g =  2* ( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+        if (g < 0)
+            g = g * -1.0;
         // float dx = x1 - x0;
         float dy = (y1 > y0) ? 1.0 : -1.0;
         // float m = dy/dx;
-        float dg0 = 2.0 * dy *((y0 - y1) + (x1 - x0));
-        float dg1 = 2.0 * dy *(y0 - y1);
+        // float dg0 = 2.0 * dy *((y0 - y1) + (x1 - x0));
+        // float dg1 = 2.0 * dy *(y0 - y1);
+        
+        for(int x = x0, y = y0; x <= x1; x++)
+        {
 
-        if(g >= 0){
-            for(int x = x0, y = y0; x <= x1; x++)
-            {
-                set_pixel(x, y, col);
-                if ( g < 0){
-                    y += dy;
-                    g += dg0;
-                }
-                else{
-                    g += dg1;
-                }
+            set_pixel(x, y, col);
+            if ( g < 0){
+                y += dy;
             }
-        }
-        else{
-            for(int x = x0, y = y0; x <= x1; x++)
-            {
-                set_pixel(x, y, col);
-                if ( g > 0){
-                    y += dy;
-                    g += dg0;
-                }
-                else{
-                    g += dg1;
-                }
-            }
+            g = 2* ( (y0 - y1)* (x) + (x1 - x0) * (y ) + (x0 * y1 )- (x1 * y0));
+            
         }
     }
     else{               // |m| > 1
 
         if(y1 < y0){        //swap the points if necessary
-            int temp = y0;
-            y0 = y1;
-            y1 = temp;
-            temp = x0;
-            x0 = x1;
-            x1 = temp;
+            std::swap(x0,x1);
+            std::swap(y0,y1);
         }
 
 
         // float g = 2 *( (x0 - x1)* (y0 + 1) + (y1 - y0) * (x0 + 0.5) + (y0 * x1 )- (y1 * x0)); // Ax + By + C
-        float g = ( (y0 - y1)* (x0 + 2.0) + (x1 - x0) * (y0 + 1.0) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
-
+        float g = 2 * ( (y0 - y1)* (x0 + 1) + (x1 - x0) * (y0 + 0.5) + (x0 * y1 )- (x1 * y0)); // Ax + By + C
+        if(g < 0)
+            g = g * -1.0;
         // float dy = y1 - y0;
         float dx = (x1 > x0) ? 1.0 : -1.0;
         // float m = dy/dx;
-        float dg0 = 2.0 * dx *((x0 - x1) + (y1 - y0));
-        float dg1 = 2.0 * dx *(x0 - x1);
+        // float dg0 = 2.0 * dx *((x0 - x1) + (y1 - y0));
+        // float dg1 = 2.0 * dx *(x0 - x1);
 
-        if(g >= 0){
-            for(int x = x0, y = y0; y <= y1; y++)
-            {
-                set_pixel(x, y, col);
-                if ( g < 0){
-                    x += dx;
-                    g += dg0;
-                }
-                else{
-                    g += dg1;
-                }
+        for(int x = x0, y = y0; y <= y1; y++)
+        {
+            set_pixel(x, y, col);
+            if ( g < 0){
+                x += dx;
             }
-        }
-        else{
-            for(int x = x0, y = y0; y <= y1; y++)
-            {
-                set_pixel(x, y, col);
-                if ( g > 0){
-                    x += dx;
-                    g += dg0;
-                }
-                else{
-                    g += dg1;
-                }
-            }
+            g = 2* ( (y0 - y1)* (x) + (x1 - x0) * (y) + (x0 * y1 )- (x1 * y0));
         }
     }
 }
