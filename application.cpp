@@ -42,10 +42,8 @@ void set_pixel(int x, int y)
 void draw_line(int x0, int y0, int x1, int y1, float col[3])
 {
     // TODO: Implement the correct algorithm here.
-    if (x1 - x0 == 0)
-        return;
 
-    if((y1 - y0)/(x1 - x0) <= 1 && (y1 - y0)/(x1 - x0) >= -1 ){   // |m| <= 1
+    if(abs(y0 - y1) <= abs(x0 - x1)){   // |m| <= 1
 
         if(x1 < x0){        //swap the points if necessary
             std::swap(x0,x1);
