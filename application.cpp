@@ -42,7 +42,7 @@ void set_pixel(int x, int y)
 void draw_line(int x0, int y0, int x1, int y1, float col[3])
 {
     // TODO: Implement the correct algorithm here.
-    if (x1 - x0 <= 0.0001 || x1 - x0 >= 0.0001)
+    if (x1 - x0 <= 0.0001 && x1 - x0 >= 0.0001)
         return;
 
     if((y1 - y0)/(x1 - x0) <= 1 && (y1 - y0)/(x1 - x0) >= -1 ){   // |m| <= 1
