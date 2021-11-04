@@ -70,7 +70,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         for(int x = x0, y = y0; x <= x1; x++)
         {
             set_pixel(x, y, col);
-            if ( g < 0.001){
+            if ( g < 0){
                 y += dy;
                 g += dg0;
             }
@@ -103,7 +103,7 @@ void draw_line(int x0, int y0, int x1, int y1, float col[3])
         for(int x = x0, y = y0; y <= y1; y++)
         {
             set_pixel(x, y, col);
-            if ( g < 0.001){
+            if ( g < 0){
                 x += dx;
                 g += dg0;
             }
